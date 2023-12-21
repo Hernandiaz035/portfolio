@@ -5,11 +5,24 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				'hd-black': '#1f1f1f',
+				'hd-black': '#131313',
 				'hd-grey': '#4d4d4d',
 				'hd-white': '#ebebeb',
-				'hd-blue': '#80a8ff',
-				'hd-dark-blue': '#296dff'
+				'hd-light-blue': '#80a8ff',
+				'hd-blue': '#296dff'
+			},
+			keyframes: {
+				wave: {
+					'0%, 100%': {
+						'background-position': '0%, 50%'
+					},
+					'50%': {
+						'background-position': '50%, 100%'
+					}
+				}
+			},
+			animation: {
+				wave: 'wave 1000ms ease-in-out infinite'
 			}
 		}
 	},
