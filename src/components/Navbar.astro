@@ -1,10 +1,56 @@
 ---
 import { info } from '@/data/info'
+import Sun from './icons/sun.svg.astro'
+import Moon from './icons/moon.svg.astro'
+
+const navbarLinks = [
+	{
+		label: 'home',
+		url: '/'
+	}
+]
 ---
 
-<nav class="flex flex-row items-center justify-between bg-slate-900 px-8 py-4 lg:px-20">
+<nav class="flex flex-row items-center justify-between px-8 py-4 lg:px-20">
 	<span class="text-2xl text-gray-900 dark:text-gray-100">{info.navbar.title}</span>
-	<ul class="flex flex-row items-center gap-8 text-gray-900 dark:text-gray-100">
-		<li><a href="/">Home</a></li>
-	</ul>
+	<div class="flex flex-row justify-between gap-16">
+		<ul class="flex flex-row items-center gap-8 text-gray-900 dark:text-gray-100">
+			{
+				navbarLinks.map(({ label, url }) => (
+					<li class="font-semibold capitalize">
+						<a href={url}>{label}</a>
+					</li>
+				))
+			}
+		</ul>
+		<button id="dark-mode-toggle" class="rounded-md border border-hd-grey p-4">
+			<span class="block dark:hidden"><Sun /></span>
+			<span class="hidden dark:block"><Moon /></span>
+		</button>
+	</div>
 </nav>
+
+<script is:inline>
+	if (
+		localStorage.theme === 'dark' ||
+		(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+	) {
+		document.documentElement.classList.add('dark')
+	} else {
+		document.documentElement.classList.remove('dark')
+	}
+
+	const toggleButton = document.querySelector('#dark-mode-toggle')
+
+	toggleButton.addEventListener('click', () => {
+		let currentTheme = localStorage.getItem('theme') ?? null
+
+		if (currentTheme === 'dark') {
+			localStorage.setItem('theme', 'light')
+			document.documentElement.classList.remove('dark')
+		} else {
+			localStorage.setItem('theme', 'dark')
+			document.documentElement.classList.add('dark')
+		}
+	})
+</script>
