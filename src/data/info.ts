@@ -8,13 +8,16 @@ export const info = {
 	portfolio: {
 		name: 'Hernan Diaz',
 		jobDescription: 'Full-Stack Web Developer',
-		about: `I'm a full-stack developer located in Sydney, Australia, with a strong background in
-		engineering and a passion for innovative web development. My main skills are in React, Next.js,
-		NodeJS, and TypeScript, ideal for both front-end and back-end development tasks.
-		Consulting has equipped me with effective communication skills and the ability to tailor
-		solutions to client needs. I am enthusiastic about technology and always eager to learn,
-		thriving in settings where I can explore new technologies and frameworks. I enjoy being challenged
-		and am always ready to tackle complex projects that push the boundaries of my expertise.`,
+		about: [
+			`I'm a full-stack developer located in Sydney, Australia, with a strong background in
+			engineering and a passion for innovative web development.`,
+			`Consulting has equipped me with effective communication skills and the ability to tailor
+			solutions to client needs.`,
+			`I am enthusiastic about technology and always eager to learn,
+			thriving in settings where I can explore new technologies and frameworks. I enjoy being challenged
+			and am always ready to tackle complex projects that push the boundaries of my expertise.`,
+			`My main skills are in React, Next.js, NodeJS, and TypeScript, ideal for both front-end and back-end development tasks.`
+		],
 
 		experience: [
 			{

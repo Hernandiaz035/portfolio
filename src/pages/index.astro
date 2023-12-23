@@ -6,15 +6,19 @@ const { portfolio } = info
 ---
 
 <Layout title="Hedior portfolio">
-	<section class="md:my-12">
-		<h1
-			class="inline-block animate-wave bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-7xl font-extrabold text-transparent"
-		>
-			{portfolio.name}
-		</h1>
-		<h2 class="pl-2 text-2xl">{portfolio.jobDescription}</h2>
+	<section>
+		<header class="md:my-12">
+			<h1
+				class="inline-block animate-wave bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 bg-clip-text text-7xl font-extrabold text-transparent"
+			>
+				{portfolio.name}
+			</h1>
+			<h2 class="pl-2 text-2xl">{portfolio.jobDescription}</h2>
+		</header>
+		<div class="mt-6 flex flex-col gap-2 md:w-8/12">
+			{portfolio.about.map((paragraph) => <p class="text-balance">{paragraph}</p>)}
+		</div>
 	</section>
-	<p class="mt-6 text-balance md:w-8/12">{portfolio.about}</p>
 	<div class="mt-16 grid grid-cols-10 gap-8 md:grid-cols-12">
 		<section class="col-span-10 col-start-1 grid grid-cols-subgrid md:col-start-3">
 			<h2 class="col-span-2 text-left text-xl font-semibold capitalize md:text-right">
