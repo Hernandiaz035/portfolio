@@ -3,18 +3,18 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: '0 5 * * *'
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 60
     steps:
-      - name: Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -26,7 +26,9 @@ jobs:
         run: npm run build
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3.4.0
+        uses: cloudflare/pages-action@v1.5.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          environment: 'production'
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          projectName: hedior-cv
+          directory: ./dist
