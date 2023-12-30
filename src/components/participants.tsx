@@ -1,21 +1,20 @@
-import { type Participant } from '@/lib/shared-bill/participants'
+import { $participants } from '@/lib/shared-bill/participants'
+import { getRandomId } from '@/lib/shared-bill/utils'
+import { useStore } from '@nanostores/react'
 import { type FC, type ChangeEvent, type MouseEvent } from 'react'
 
-export type ParticipantsProps = {
-	participants: Participant[]
-	setParticipants: (participants: Participant[]) => void
-}
+export const Participants: FC = () => {
+	const participants = useStore($participants)
 
-export const Participants: FC<ParticipantsProps> = ({ participants, setParticipants }) => {
 	const addParticipant = () => {
-		setParticipants([...participants, { name: '', shares: 0 }])
+		$participants.set([...participants, { name: '', shares: 0, id: getRandomId() }])
 	}
 
 	const deleteParticipant = (event: MouseEvent<HTMLButtonElement>, index: number) => {
 		event.preventDefault()
 		const newParticipants = [...participants]
 		newParticipants.splice(index, 1)
-		setParticipants(newParticipants)
+		$participants.set(newParticipants)
 	}
 
 	const modifyParticipantName = (event: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -23,7 +22,7 @@ export const Participants: FC<ParticipantsProps> = ({ participants, setParticipa
 		const newName = event.currentTarget.value.trim()
 		newParticipants[index].name = newName
 
-		setParticipants(newParticipants)
+		$participants.set(newParticipants)
 	}
 
 	const modifyParticipantShares = (event: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -36,7 +35,7 @@ export const Participants: FC<ParticipantsProps> = ({ participants, setParticipa
 			newParticipants[index].shares = 0
 		}
 
-		setParticipants(newParticipants)
+		$participants.set(newParticipants)
 	}
 
 	const calculateTotal = () => participants.reduce((acc, item) => acc + item.shares, 0)

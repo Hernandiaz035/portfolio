@@ -1,27 +1,24 @@
-import type { Account } from '@/lib/shared-bill/accounts'
-import type { ChangeEvent, FC, MouseEvent } from 'react'
+import { $accounts } from '@/lib/shared-bill/accounts'
+import { useStore } from '@nanostores/react'
+import type { FC, ChangeEvent } from 'react'
 
-export type AccountsProps = {
-	accounts: Account[]
-	setAccounts: (accounts: Account[]) => void
-}
-
-export const Accounts: FC<AccountsProps> = ({ accounts, setAccounts }) => {
+export const Accounts: FC = () => {
+	const accounts = useStore($accounts)
 	const addAccount = () => {
 		const newAccounts = [...accounts, { name: '', total: null }]
-		setAccounts(newAccounts)
+		$accounts.set(newAccounts)
 	}
 
 	const deleteAccount = (index: number) => {
 		const newAccounts = [...accounts]
 		newAccounts.splice(index, 1)
-		setAccounts(newAccounts)
+		$accounts.set(newAccounts)
 	}
 
 	const modifyAccountName = (event: ChangeEvent<HTMLInputElement>, index: number) => {
 		const newAccounts = [...accounts]
 		newAccounts[index].name = event.target.value
-		setAccounts(newAccounts)
+		$accounts.set(newAccounts)
 	}
 
 	return (
@@ -55,7 +52,7 @@ export const Accounts: FC<AccountsProps> = ({ accounts, setAccounts }) => {
 								/>
 							</td>
 							<td>
-								<input type="text" name="participant-total" value={account.total ?? '-'} />
+								<p>{account.total ?? '—'}</p>
 							</td>
 							<td>
 								<button

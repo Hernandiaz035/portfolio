@@ -1,9 +1,12 @@
+import { persistentAtom } from '@nanostores/persistent'
+
 export type Participant = {
+	id: string
 	name: string
 	shares: number
 }
 
-export const dataParticipants: Participant[] = [
+const dataParticipants = [
 	{
 		name: 'Paola + Ivan',
 		shares: 2
@@ -45,3 +48,8 @@ export const dataParticipants: Participant[] = [
 		shares: 1
 	}
 ]
+
+export const $participants = persistentAtom<Participant[]>('participants', [], {
+	encode: JSON.stringify,
+	decode: JSON.parse
+})
