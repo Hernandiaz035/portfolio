@@ -3,6 +3,7 @@ import type { Account } from './accounts'
 import type { Participant } from './participants'
 
 export type Expense = {
+	id: string
 	concept: string
 	account: Account | null
 	participant: Participant | null

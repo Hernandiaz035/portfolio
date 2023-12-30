@@ -1,3 +1,4 @@
+import { $accounts } from '@/lib/shared-bill/accounts'
 import { $participants } from '@/lib/shared-bill/participants'
 import { getRandomId } from '@/lib/shared-bill/utils'
 import { useStore } from '@nanostores/react'
@@ -5,9 +6,10 @@ import { type FC, type ChangeEvent, type MouseEvent } from 'react'
 
 export const Participants: FC = () => {
 	const participants = useStore($participants)
+	const accounts = useStore($accounts)
 
 	const addParticipant = () => {
-		$participants.set([...participants, { name: '', shares: 0, id: getRandomId() }])
+		$participants.set([...participants, { name: '', shares: 1, id: getRandomId(), accounts: [] }])
 	}
 
 	const deleteParticipant = (event: MouseEvent<HTMLButtonElement>, index: number) => {
@@ -19,7 +21,7 @@ export const Participants: FC = () => {
 
 	const modifyParticipantName = (event: ChangeEvent<HTMLInputElement>, index: number) => {
 		const newParticipants = [...participants]
-		const newName = event.currentTarget.value.trim()
+		const newName = event.currentTarget.value
 		newParticipants[index].name = newName
 
 		$participants.set(newParticipants)
@@ -31,7 +33,7 @@ export const Participants: FC = () => {
 		const newValueParsed = Number.parseFloat(newValue)
 		newParticipants[index].shares = newValueParsed
 
-		if (newValue === '' || newValue === '0' || Number.isNaN(newValueParsed)) {
+		if (newValue === '' || newValueParsed < 0 || Number.isNaN(newValueParsed)) {
 			newParticipants[index].shares = 0
 		}
 
@@ -56,6 +58,7 @@ export const Participants: FC = () => {
 					<tr className="border border-gray-500">
 						<td>Name</td>
 						<td>Amount of Shares</td>
+						<td>Accounts</td>
 						<td>Actions</td>
 					</tr>
 				</thead>
@@ -77,6 +80,20 @@ export const Participants: FC = () => {
 									value={participant.shares}
 									onChange={(event) => modifyParticipantShares(event, index)}
 								/>
+							</td>
+							<td>
+								<div className="grid grid-cols-2 gap-1 p-1">
+									{accounts.map((account) => (
+										<fieldset className="flex flex-row gap-1">
+											<input
+												type="checkbox"
+												name={participant.id + account.id}
+												checked={participant.accounts.some((acc) => acc.id === account.id)}
+											/>
+											<label htmlFor={participant.id + account.id}>{account.name}</label>
+										</fieldset>
+									))}
+								</div>
 							</td>
 							<td>
 								<button

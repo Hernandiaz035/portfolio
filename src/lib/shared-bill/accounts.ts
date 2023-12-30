@@ -1,6 +1,7 @@
 import { persistentAtom } from '@nanostores/persistent'
 
 export type Account = {
+	id: string
 	name: string
 	total: number | null
 }

@@ -1,11 +1,12 @@
 import { $accounts } from '@/lib/shared-bill/accounts'
+import { getRandomId } from '@/lib/shared-bill/utils'
 import { useStore } from '@nanostores/react'
 import type { FC, ChangeEvent } from 'react'
 
 export const Accounts: FC = () => {
 	const accounts = useStore($accounts)
 	const addAccount = () => {
-		const newAccounts = [...accounts, { name: '', total: null }]
+		const newAccounts = [...accounts, { name: '', total: null, id: getRandomId() }]
 		$accounts.set(newAccounts)
 	}
 
@@ -36,7 +37,8 @@ export const Accounts: FC = () => {
 				<thead className="font-semibold">
 					<tr className="border border-gray-500">
 						<td>Name</td>
-						<td>Amount of Shares</td>
+						<td>Bill</td>
+						<td>Total</td>
 						<td>actions</td>
 					</tr>
 				</thead>
@@ -51,8 +53,13 @@ export const Accounts: FC = () => {
 									onChange={(event) => modifyAccountName(event, index)}
 								/>
 							</td>
-							<td>
-								<p>{account.total ?? '—'}</p>
+							<td className="min-w-20">
+								{/* average calculated */}
+								<span className="w-full">{account.total ?? '—'}</span>
+							</td>
+							<td className="min-w-20">
+								{/* total summed */}
+								<span className="w-full">{account.total ?? '—'}</span>
 							</td>
 							<td>
 								<button

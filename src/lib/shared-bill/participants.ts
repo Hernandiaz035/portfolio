@@ -1,9 +1,11 @@
 import { persistentAtom } from '@nanostores/persistent'
+import type { Account } from './accounts'
 
 export type Participant = {
 	id: string
 	name: string
 	shares: number
+	accounts: Account[]
 }
 
 const dataParticipants = [

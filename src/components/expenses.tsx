@@ -1,6 +1,7 @@
 import { $accounts } from '@/lib/shared-bill/accounts'
 import { $expenses } from '@/lib/shared-bill/expenses'
 import { $participants } from '@/lib/shared-bill/participants'
+import { getRandomId } from '@/lib/shared-bill/utils'
 import { useStore } from '@nanostores/react'
 import type { FC } from 'react'
 
@@ -10,7 +11,10 @@ export const Expenses: FC = () => {
 	const expenses = useStore($expenses)
 
 	const addExpense = () => {
-		$expenses.set([...expenses, { concept: '', account: null, participant: null, amount: 0 }])
+		$expenses.set([
+			...expenses,
+			{ concept: '', account: null, participant: null, amount: 0, id: getRandomId() }
+		])
 	}
 
 	const deleteExpense = (index: number) => {
