@@ -1,10 +1,15 @@
+import { $expenses } from '@/lib/shared-bill/expenses'
 import { $accounts } from '@/lib/shared-bill/accounts'
+import { $participants } from '@/lib/shared-bill/participants'
 import { getRandomId } from '@/lib/shared-bill/utils'
 import { useStore } from '@nanostores/react'
-import type { FC, ChangeEvent } from 'react'
+import { type FC, type ChangeEvent } from 'react'
 
 export const Accounts: FC = () => {
 	const accounts = useStore($accounts)
+	const expenses = useStore($expenses)
+	const participants = useStore($participants)
+
 	const addAccount = () => {
 		const newAccounts = [...accounts, { name: '', total: null, id: getRandomId() }]
 		$accounts.set(newAccounts)

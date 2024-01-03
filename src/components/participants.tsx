@@ -1,15 +1,20 @@
 import { $accounts } from '@/lib/shared-bill/accounts'
+import { $expenses } from '@/lib/shared-bill/expenses'
 import { $participants } from '@/lib/shared-bill/participants'
 import { getRandomId } from '@/lib/shared-bill/utils'
 import { useStore } from '@nanostores/react'
-import { type FC, type ChangeEvent, type MouseEvent } from 'react'
+import { type FC, type ChangeEvent, type MouseEvent, useEffect } from 'react'
 
 export const Participants: FC = () => {
 	const participants = useStore($participants)
 	const accounts = useStore($accounts)
+	const expenses = useStore($expenses)
 
 	const addParticipant = () => {
-		$participants.set([...participants, { name: '', shares: 1, id: getRandomId(), accounts: [] }])
+		$participants.set([
+			...participants,
+			{ name: '', shares: 1, id: getRandomId(), accounts: [], contribution: null }
+		])
 	}
 
 	const deleteParticipant = (event: MouseEvent<HTMLButtonElement>, index: number) => {
@@ -40,10 +45,50 @@ export const Participants: FC = () => {
 		$participants.set(newParticipants)
 	}
 
+	const modifyParticipantAccounts = (
+		participantIdx: number,
+		accountId: string,
+		checked: boolean
+	) => {
+		const newParticipants = [...participants]
+
+		const accountOptIdx = accounts.findIndex((acc) => acc.id === accountId)
+
+		const editingAccount = accounts.find((acc) => acc.id === accountId)
+
+		if (checked && editingAccount) {
+			newParticipants[participantIdx].accounts.push(editingAccount)
+		} else {
+			newParticipants[participantIdx].accounts = newParticipants[participantIdx].accounts.filter(
+				(acc) => acc.id !== accounts[accountOptIdx].id
+			)
+		}
+
+		$participants.set(newParticipants)
+	}
+
+	// debounced useEffect to calculate the total contributed by the participant
+	useEffect(() => {
+		const sumObj: Record<string, number> = {}
+		const newParticipants = [...participants]
+
+		expenses.forEach((it) => {
+			if (sumObj[it.id]) {
+				sumObj[it.id] += it.amount
+				return
+			}
+			sumObj[it.id] = it.amount
+		})
+
+		newParticipants.forEach(({ id, contribution }) => {
+			contribution = sumObj[id]
+		})
+	}, [expenses])
+
 	const calculateTotal = () => participants.reduce((acc, item) => acc + item.shares, 0)
 
 	return (
-		<section className="mx-auto max-w-screen-sm p-8">
+		<section className="mx-auto max-w-screen-lg p-8">
 			<div className="mb-2 flex w-full flex-row items-center justify-between">
 				<h2 className="text-xl font-semibold">Participants</h2>
 				<button
@@ -58,6 +103,7 @@ export const Participants: FC = () => {
 					<tr className="border border-gray-500">
 						<td>Name</td>
 						<td>Amount of Shares</td>
+						<td>Contributions</td>
 						<td>Accounts</td>
 						<td>Actions</td>
 					</tr>
@@ -82,16 +128,27 @@ export const Participants: FC = () => {
 								/>
 							</td>
 							<td>
+								<p>{participant.contribution ?? '—'}</p>
+							</td>
+							<td>
 								<div className="grid grid-cols-2 gap-1 p-1">
 									{accounts.map((account) => (
-										<fieldset className="flex flex-row gap-1">
+										<div key={account.id} className="flex flex-row gap-1 ">
 											<input
 												type="checkbox"
 												name={participant.id + account.id}
 												checked={participant.accounts.some((acc) => acc.id === account.id)}
+												onChange={(event) =>
+													modifyParticipantAccounts(index, account.id, event.target.checked)
+												}
 											/>
-											<label htmlFor={participant.id + account.id}>{account.name}</label>
-										</fieldset>
+											<label
+												className="w-full truncate text-xs"
+												htmlFor={participant.id + account.id}
+											>
+												{account.name}
+											</label>
+										</div>
 									))}
 								</div>
 							</td>

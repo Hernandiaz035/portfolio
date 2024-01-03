@@ -5,6 +5,7 @@ export type Participant = {
 	id: string
 	name: string
 	shares: number
+	contribution: number | null
 	accounts: Account[]
 }
 

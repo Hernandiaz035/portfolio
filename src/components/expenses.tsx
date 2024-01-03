@@ -46,8 +46,14 @@ export const Expenses: FC = () => {
 		$expenses.set(newExpenses)
 	}
 
+	const modifyExpenseAmount = (value: string, index: number) => {
+		const newExpenses = [...expenses]
+		newExpenses[index].amount = Number(value)
+		$expenses.set(newExpenses)
+	}
+
 	return (
-		<section className="mx-auto max-w-screen-md p-8">
+		<section className="mx-auto max-w-screen-lg p-8">
 			<div className="mb-2 flex w-full flex-row items-center justify-between">
 				<h2 className="text-xl font-semibold">Expenses</h2>
 				<button
@@ -67,7 +73,7 @@ export const Expenses: FC = () => {
 							<span className="px-4">Account</span>
 						</td>
 						<td>
-							<span className="px-4">Participants</span>
+							<span className="px-4">Participant</span>
 						</td>
 						<td>
 							<span className="px-4">Amount</span>
@@ -126,7 +132,15 @@ export const Expenses: FC = () => {
 								</select>
 							</td>
 							<td>
-								<p className="pl-4">{expense.amount}</p>
+								<input
+									type="text"
+									name="expense-amount"
+									className="w-full pl-4"
+									value={expense.amount}
+									onChange={(event) => {
+										modifyExpenseAmount(event.currentTarget.value, index)
+									}}
+								/>
 							</td>
 							<td className="pl-4">
 								<button
