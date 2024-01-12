@@ -1,0 +1,26 @@
+---
+import ActiveBadge from '@/components/ActiveBadge.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Hedior">
+	<section>
+		<header class="mb-8 mt-20 flex w-fit flex-row items-center justify-between gap-8">
+			<h1
+				class="inline-block bg-gradient-to-r from-indigo-500 from-25% via-purple-500 via-50% to-pink-600 to-95% bg-clip-text text-7xl font-extrabold text-transparent"
+			>
+				Hernan Diaz
+			</h1>
+			<ActiveBadge>Available to hire</ActiveBadge>
+		</header>
+
+		<div class="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-12">
+			<h2 class="col-span-2 text-pretty text-xl md:col-span-4 lg:col-span-8">
+				Hello! I'm a Full-Stack Developer in Sydney. My career is marked by creative solutions in
+				tech, ranging from innovative NFT marketplaces to sophisticated banking systems. I thrive on
+				learning new technologies and am keen on sharing this knowledge. Eager for new challenges, I
+				bring a blend of skill, curiosity, and collaborative spirit to every project.
+			</h2>
+		</div>
+	</section>
+</Layout>
