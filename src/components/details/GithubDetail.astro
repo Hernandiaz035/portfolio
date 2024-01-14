@@ -1,9 +1,12 @@
 ---
+import AnchorDetail from './AnchorDetail.astro'
 import GithubIcon from '../icons/GithubIcon.astro'
-import DetailWrapper from './DetailWrapper.astro'
+import { type Props as AnchorProps } from './AnchorDetail.astro'
+
+interface Props extends AnchorProps {}
 ---
 
-<DetailWrapper>
+<AnchorDetail href={Astro.props.href}>
 	<GithubIcon slot="icon" class="size-5" />
 	<span>Github</span>
-</DetailWrapper>
+</AnchorDetail>
