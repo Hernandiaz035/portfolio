@@ -1,0 +1,31 @@
+---
+import DetailWrapper from './DetailWrapper.astro'
+
+export interface Props {
+	tooltip: string
+	action?: () => void
+}
+
+const { tooltip = '' } = Astro.props
+---
+
+<button type="button" class="group">
+	<DetailWrapper>
+		<slot name="override-tooltip">
+			<div
+				class="absolute -top-1 left-1/2 hidden -translate-x-1/2 -translate-y-full flex-col items-center transition-all duration-1000 group-hover:flex"
+			>
+				<div class="rounded-lg bg-hd-grey/10 px-2.5 py-1 backdrop-blur dark:bg-hd-grey/60">
+					<span class="select-none text-sm font-light">{tooltip}</span>
+				</div>
+				<div
+					class="h-0 w-0 border-x-8 border-t-8 border-x-transparent border-t-hd-grey/10 backdrop-blur dark:border-t-hd-grey/50"
+				>
+				</div>
+			</div>
+		</slot>
+		<slot name="icon" />
+		<slot />
+		<slot name="action-icon" />
+	</DetailWrapper>
+</button>
