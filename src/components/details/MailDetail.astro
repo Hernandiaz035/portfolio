@@ -1,10 +1,20 @@
 ---
-import ActionDetail from './ActionDetail.astro'
+import ActionDetail from './base/ActionDetail.astro'
 import MailIcon from '../icons/MailIcon.astro'
 import CopyIcon from '../icons/CopyIcon.astro'
+
+interface Props {
+	copyText: string
+}
+
+const { copyText } = Astro.props
+
+const copyCallback = () => {
+	navigator.clipboard.writeText(copyText)
+}
 ---
 
-<ActionDetail tooltip="Copy!">
+<ActionDetail tooltip="Copy!" action={copyCallback}>
 	<MailIcon slot="icon" class="size-5" />
 	<span class="before:content-['hfdiaz035'] after:content-['gmail.com']">&#64</span>
 	<CopyIcon slot="action-icon" class="size-4 text-hd-black/70 dark:text-white/70" />

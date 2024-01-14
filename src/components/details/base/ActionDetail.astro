@@ -6,7 +6,7 @@ export interface Props {
 	action?: () => void
 }
 
-const { tooltip = '' } = Astro.props
+const { tooltip = '', action } = Astro.props
 ---
 
 <button type="button" class="group">
