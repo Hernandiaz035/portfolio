@@ -1,0 +1,12 @@
+---
+import AnchorDetail from './base/AnchorDetail.astro'
+import LinkedInIcon from '../icons/LinkedInIcon.astro'
+import { type Props as AnchorProps } from './base/AnchorDetail.astro'
+
+interface Props extends AnchorProps {}
+---
+
+<AnchorDetail href={Astro.props.href}>
+	<LinkedInIcon class="size-5" slot="icon" />
+	<span>LinkedIn</span>
+</AnchorDetail>

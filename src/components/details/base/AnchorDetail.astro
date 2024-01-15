@@ -1,0 +1,16 @@
+---
+import External from '../../icons/External.astro'
+import DetailWrapper from './DetailWrapper.astro'
+export interface Props {
+	href: string
+}
+const { href } = Astro.props
+---
+
+<a href={href} class="group">
+	<DetailWrapper>
+		<slot name="icon" />
+		<slot />
+		<External class="size-4 text-hd-black/70 dark:text-white/70" />
+	</DetailWrapper>
+</a>

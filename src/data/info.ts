@@ -1,7 +1,4 @@
 export const info = {
-	navbar: {
-		title: 'Hedior'
-	},
 	footer: {
 		title: 'Hedior'
 	},
