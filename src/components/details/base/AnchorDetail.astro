@@ -7,7 +7,7 @@ export interface Props {
 const { href } = Astro.props
 ---
 
-<a href={href} class="group">
+<a href={href} target="_blank" rel="noreferrer" data-astro-prefetch class="group">
 	<DetailWrapper>
 		<slot name="icon" />
 		<slot />
