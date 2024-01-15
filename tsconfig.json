@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"jsx": "react-jsx",
 		"jsxImportSource": "preact",
-		"baseUrl": "/Users/hedior/Developer/personal/portfolio",
+		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"]
 		}
