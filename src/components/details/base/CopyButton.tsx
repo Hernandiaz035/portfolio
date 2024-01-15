@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
-import { useState, type FC, type PropsWithChildren } from 'preact/compat'
+import type { FC, PropsWithChildren } from 'preact/compat'
+import { useState } from 'preact/hooks'
 
 type CopyButtonProps = {
 	copyText: string
