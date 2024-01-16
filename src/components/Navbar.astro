@@ -5,16 +5,16 @@ import Moon from './icons/moon.svg.astro'
 const navbarLinks = [
 	{
 		label: 'home',
-		url: '/'
+		url: '#'
 	}
 ]
 ---
 
 <nav
-	class="fixed left-0 right-0 top-0 mb-6 border-b border-b-hd-grey/30 bg-hd-white px-8 py-4 shadow lg:px-20 dark:bg-hd-black"
+	class="fixed left-0 right-0 top-0 z-50 mb-6 border-b border-b-hd-grey/70 bg-hd-white/50 px-8 py-4 shadow backdrop-blur-sm lg:px-20 dark:bg-hd-black/50"
 >
 	<div class="mx-auto flex w-full max-w-screen-lg flex-row items-center justify-between">
-		<span class="text-3xl font-bold">HD</span>
+		<span class="text-2xl font-bold">HD</span>
 		<div class="flex flex-row items-center justify-between gap-16">
 			{
 				import.meta.env.DEV && (
@@ -38,7 +38,7 @@ const navbarLinks = [
 			</ul>
 			<button
 				id="dark-mode-toggle"
-				class="rounded-md border border-gray-300 p-2 dark:border-gray-700"
+				class="rounded-md border border-gray-300 p-1.5 dark:border-gray-700"
 				aria-label="Toggle dark mode"
 			>
 				<span class="block dark:hidden"><Sun /></span>
