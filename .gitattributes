@@ -1,0 +1,6 @@
+**/*.key filter=git-crypt diff=git-crypt
+**/*.secret.* filter=git-crypt diff=git-crypt
+secrets/** filter=git-crypt diff=git-crypt
+
+# .gitattributes should not be encrypted
+.gitattributes !filter !diff
