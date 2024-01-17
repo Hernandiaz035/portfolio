@@ -4,6 +4,8 @@ import Layout from '../layouts/Layout.astro'
 import LinkedInDetail from '@/components/details/LinkedInDetail.astro'
 import MailDetail from '@/components/details/MailDetail.astro'
 import GithubDetail from '@/components/details/GithubDetail.astro'
+import Timeline from '@/components/timeline/Timeline.astro'
+import { experience } from '@/content/data.secret'
 ---
 
 <Layout title="Hedior">
@@ -34,5 +36,9 @@ import GithubDetail from '@/components/details/GithubDetail.astro'
 				<li class=""><MailDetail /></li>
 			</ul>
 		</div>
+	</section>
+
+	<section>
+		<Timeline experience={experience} />
 	</section>
 </Layout>

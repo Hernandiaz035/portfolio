@@ -1,0 +1,24 @@
+---
+import type { Experience } from '@/content/types'
+import SectionTitle from '@/components/SectionTitle.astro'
+import Briefcase from '@/components/icons/Briefcase.astro'
+import Role from './Role.astro'
+
+interface Props {
+	experience: Experience
+}
+
+const { experience } = Astro.props
+---
+
+<div class="mx-4 mt-24 grid gap-4 sm:grid-cols-12">
+	<aside class="col-span-3 ml-2 sm:ml-0">
+		<SectionTitle title="Experience">
+			<Briefcase class="size-8 min-w-8" slot="icon" />
+		</SectionTitle>
+	</aside>
+
+	<ol class="relative col-span-8 ml-6 border-l-2 border-gray-300 dark:border-gray-700">
+		{experience.map((role) => <Role {...role} />)}
+	</ol>
+</div>
