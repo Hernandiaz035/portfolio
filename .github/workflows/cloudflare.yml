@@ -16,6 +16,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Install git-crypt
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install git-crypt
+
+      - name: Decrypt files with git-crypt
+        env:
+          GIT_CRYPT_KEY_B64: ${{ secrets.GIT_CRYPT_KEY_B64 }}
+        run: |
+          echo "$GIT_CRYPT_KEY_B64" | base64 -d > git-crypt.key
+          git-crypt unlock git-crypt.key
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
