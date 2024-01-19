@@ -1,5 +1,18 @@
+---
+import { cn } from '@/utils/cn'
+
+interface Props {
+	className?: string
+}
+
+const { className } = Astro.props
+---
+
 <div
-	class="relative flex w-fit flex-row items-center gap-2 rounded-md border border-gray-300 bg-white/5 px-4 py-2 transition-all hover:scale-[1.03] hover:bg-white/10"
+	class={cn(
+		'relative flex w-fit flex-row items-center gap-2 rounded-md border border-gray-300 bg-white/5 px-4 py-2 transition-all hover:scale-[1.03] hover:bg-white/10',
+		className
+	)}
 >
 	<slot name="icon" />
 	<slot />

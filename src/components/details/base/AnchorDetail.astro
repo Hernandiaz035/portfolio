@@ -1,16 +1,19 @@
 ---
 import External from '../../icons/External.astro'
 import DetailWrapper from './DetailWrapper.astro'
+
 export interface Props {
 	href: string
+	className?: string
+	isExternal?: boolean
 }
-const { href } = Astro.props
+const { href, isExternal = true, className } = Astro.props
 ---
 
-<a href={href} target="_blank" rel="noreferrer" data-astro-prefetch class="group">
-	<DetailWrapper>
+<a href={href} target="_blank" rel="noreferrer" class="group">
+	<DetailWrapper {className}>
 		<slot name="icon" />
 		<slot />
-		<External class="size-4 text-hd-black/70 dark:text-white/70" />
+		{isExternal && <External class="size-4 text-hd-black/70 dark:text-white/70" />}
 	</DetailWrapper>
 </a>
