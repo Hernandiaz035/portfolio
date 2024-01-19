@@ -8,3 +8,15 @@ export type Role = {
 }
 
 export type Experience = Role[]
+
+export type Project = {
+	title: string
+	description: string
+	image: string
+	imageAlt?: string
+	tags: string[]
+	links: {
+		label: string
+		url: string
+	}[]
+}

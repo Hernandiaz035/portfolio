@@ -1,0 +1,30 @@
+---
+import Laptop from '@/components/icons/Laptop.astro'
+import SectionTitle from '@/components/SectionTitle.astro'
+import type { Project } from '@/content/types'
+import Card from './Card.astro'
+
+interface Props {
+	projects: Project[]
+}
+
+const { projects } = Astro.props
+---
+
+<div class="mx-4 mt-24 grid gap-4 sm:grid-cols-12">
+	<div class="col-span-12">
+		<SectionTitle title="Projects">
+			<Laptop class="size-8 min-w-8" slot="icon" />
+		</SectionTitle>
+	</div>
+
+	<ul class="col-span-12 gap-4 sm:grid sm:grid-cols-subgrid">
+		{
+			projects.map((project) => (
+				<li class="col-span-6">
+					<Card {...project} />
+				</li>
+			))
+		}
+	</ul>
+</div>
