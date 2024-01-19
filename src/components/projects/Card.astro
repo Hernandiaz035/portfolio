@@ -9,21 +9,27 @@ const { image, imageAlt, title, description, tags, links } = Astro.props
 ---
 
 <article
-	class="w-full rounded-lg border border-gray-500/60 object-cover transition-transform hover:scale-105"
+	class="w-full rounded-lg border border-gray-500/60 object-cover transition-all hover:scale-[1.02] hover:bg-hd-white/[2%]"
 >
 	<img src={image} alt={imageAlt} class="rounded-t-lg" />
 	<div class="flex size-full flex-col gap-y-2 px-4 pb-8 pt-4">
 		<h3 class="text-balance text-xl font-semibold">{title}</h3>
 		<p class="text-pretty">{description}</p>
 		<ul class="flex flex-row flex-wrap gap-2">
-			{tags.map((tag) => <Pill>{tag}</Pill>)}
+			{
+				tags.map((tag) => (
+					<Pill>
+						<li>{tag}</li>
+					</Pill>
+				))
+			}
 		</ul>
-		<ul class="mx-4 mt-6 grid grid-cols-2 gap-8">
+		<ul class="mx-2 mt-6 grid grid-cols-2 gap-4 xl:gap-x-8">
 			{
 				links.map((link) => (
-					<li>
+					<li class="col-span-2 sm:col-span-1">
 						<AnchorDetail className="w-full justify-between border-[1.5px]" href={link.url}>
-							{link.label}
+							<span class="overflow-hidden text-ellipsis text-nowrap text-sm">{link.label}</span>
 						</AnchorDetail>
 					</li>
 				))
