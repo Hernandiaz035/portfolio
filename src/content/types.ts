@@ -20,3 +20,5 @@ export type Project = {
 		url: string
 	}[]
 }
+
+export type Projects = Project[]
