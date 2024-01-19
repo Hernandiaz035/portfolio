@@ -14,6 +14,6 @@ const { href, isExternal = true, className } = Astro.props
 	<DetailWrapper {className}>
 		<slot name="icon" />
 		<slot />
-		{isExternal && <External class="size-4 text-hd-black/70 dark:text-white/70" />}
+		{isExternal && <External class="size-4 min-w-4 text-hd-black/70 dark:text-white/70" />}
 	</DetailWrapper>
 </a>
