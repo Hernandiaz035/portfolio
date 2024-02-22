@@ -37,6 +37,14 @@ jobs:
           node-version: 20
           package-manager: pnpm@latest
 
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/pnpm/store
+          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-cache-
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1.5.0
         with:
